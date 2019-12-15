@@ -1,13 +1,17 @@
-name: CI
-
-on: [push]
+name: Update Docker Hub Description
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - README.md
+      - .github/workflows/dockerhub_description.yml
 
 jobs:
-  build:
-
+  dockerHubDescription:
     runs-on: ubuntu-latest
-
     steps:
+    - uses: actions/checkout@v1
     - name: Docker Hub Description
       uses: peter-evans/dockerhub-description@v2.1.0
       env:
