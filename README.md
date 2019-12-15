@@ -35,4 +35,4 @@ You can then use the following command (using the name you allocated in the buil
     
 ## More
 
-For more info on Apache Tika Server, go to the [Apache Tika Server documentation](http://wiki.apache.org/tika/TikaJAXRS).logicalspark/docker-tikaserver
+For more info on Apache Tika Server, go to the [Apache Tika Server documentation](http://wiki.apache.org/tika/TikaJAXRS)
