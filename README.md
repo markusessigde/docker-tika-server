@@ -1,3 +1,6 @@
+# Based on [LogicalSpark/docker-tikaserver](https://github.com/LogicalSpark/docker-tikaserver)
+This repo is used to build the docker image on raspberrypi.
+
 # docker-tika-server
 This repo contains the Dockerfile to create a docker image that contains the latest Ubuntu running the Apache Tika 1.22 Server on Port 9998 using Java 11.
 
