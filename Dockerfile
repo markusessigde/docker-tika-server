@@ -16,7 +16,7 @@ RUN	apt-get update \
 			tesseract-ocr-fra \
 			tesseract-ocr-spa \
 			tesseract-ocr-deu -y \
-	&& wget https://www.imagemagick.org/download/ImageMagick.tar.gz \
+	&& curl -sSL https://www.imagemagick.org/download/ImageMagick.tar.gz -o ImageMagick.tar.gz \
     && tar xf ImageMagick.tar.gz \
     && cd ImageMagick-7* \
     && ./configure \
