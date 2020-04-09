@@ -1,0 +1,26 @@
+image: docker:git
+
+stages:
+  - build
+
+
+.docker-prepare: &docker-prepare
+  before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#    - echo -n | openssl s_client -connect services.gradle.org:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/services.gradle.org.cert
+#    - keytool -import -trustcacerts -file /tmp/services.gradle.org.cert -alias services.gradle.org -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+#    - docker login -u "$CI_REGISTRY_USER -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+.docker-build: &docker-build
+  image: docker:latest
+  <<: *docker-prepare
+
+
+build-docker:
+  <<: *docker-build
+  stage: build
+  script:
+    - docker build -f Dockerfile -t "$CI_REGISTRY_IMAGE":tika-server .
+    - docker push "$CI_REGISTRY_IMAGE":tika-server
+
+

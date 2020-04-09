@@ -1,11 +1,31 @@
 FROM ubuntu:latest
 
-ENV TIKA_VERSION 1.23
+ENV TIKA_VERSION 1.24
 ENV TIKA_SERVER_URL https://www.apache.org/dist/tika/tika-server-$TIKA_VERSION.jar
 
 RUN	apt-get update \
-	&& apt-get install gnupg openjdk-11-jre-headless curl gdal-bin tesseract-ocr \
-		tesseract-ocr-eng tesseract-ocr-ita tesseract-ocr-fra tesseract-ocr-spa tesseract-ocr-deu -y \
+	&& apt-get install gnupg \
+			openjdk-11-jre-headless \
+			curl \
+			gdal-bin \
+ 			build-essential \
+			python3-pip \
+			tesseract-ocr \
+		    tesseract-ocr-eng \
+			tesseract-ocr-ita \
+			tesseract-ocr-fra \
+			tesseract-ocr-spa \
+			tesseract-ocr-deu -y \
+	&& wget https://www.imagemagick.org/download/ImageMagick.tar.gz \
+    && tar xf ImageMagick.tar.gz \
+    && cd ImageMagick-7* \
+    && ./configure \
+    && make \
+    && make install \
+    && ldconfig /usr/local/lib \
+    && cd ../ \
+    && rm -rf ImageMagick.tar.gz ImageMagick-7*
+	&& pip install numpy skimage matplotlib tkinter
 	&& curl -sSL https://people.apache.org/keys/group/tika.asc -o /tmp/tika.asc \
 	&& gpg --import /tmp/tika.asc \
 	&& curl -sSL "$TIKA_SERVER_URL.asc" -o /tmp/tika-server-${TIKA_VERSION}.jar.asc \
