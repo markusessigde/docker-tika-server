@@ -25,7 +25,7 @@ RUN	apt-get update \
     && ldconfig /usr/local/lib \
     && cd ../ \
     && rm -rf ImageMagick.tar.gz ImageMagick-7* \
-	&& pip install numpy skimage matplotlib tkinter \
+	&& pip3 install numpy skimage matplotlib tkinter \
 	&& curl -sSL https://people.apache.org/keys/group/tika.asc -o /tmp/tika.asc \
 	&& gpg --import /tmp/tika.asc \
 	&& curl -sSL "$TIKA_SERVER_URL.asc" -o /tmp/tika-server-${TIKA_VERSION}.jar.asc \
