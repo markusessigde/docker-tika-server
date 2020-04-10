@@ -6,10 +6,6 @@ ENV TIKA_SERVER_URL https://www.apache.org/dist/tika/tika-server-$TIKA_VERSION.j
 
 # set noninteractive installation
 ENV DEBIAN_FRONTEND noninteractive
-#install tzdata package
-RUN apt-get install -y tzdata \
-	&& ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-    && dpkg-reconfigure --frontend noninteractive tzdata
 
 
 RUN	apt-get update \
@@ -18,6 +14,7 @@ RUN	apt-get update \
 			curl \
 			gdal-bin \
  			build-essential \
+			tzdata \
 			python3-pip \
 			python3-tk \
 			tesseract-ocr \
@@ -26,6 +23,8 @@ RUN	apt-get update \
 			tesseract-ocr-fra \
 			tesseract-ocr-spa \
 			tesseract-ocr-deu -y \
+	&& ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
 	&& curl -sSL https://www.imagemagick.org/download/ImageMagick.tar.gz -o ImageMagick.tar.gz \
     && tar xf ImageMagick.tar.gz \
     && cd ImageMagick-7* \
