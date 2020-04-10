@@ -10,6 +10,7 @@ RUN	apt-get update \
 			gdal-bin \
  			build-essential \
 			python3-pip \
+			python3-tk \
 			tesseract-ocr \
 		    tesseract-ocr-eng \
 			tesseract-ocr-ita \
@@ -25,7 +26,7 @@ RUN	apt-get update \
     && ldconfig /usr/local/lib \
     && cd ../ \
     && rm -rf ImageMagick.tar.gz ImageMagick-7* \
-	&& pip3 install numpy scikit-image matplotlib tkinter \
+	&& pip3 install numpy scikit-image matplotlib \
 	&& curl -sSL https://people.apache.org/keys/group/tika.asc -o /tmp/tika.asc \
 	&& gpg --import /tmp/tika.asc \
 	&& curl -sSL "$TIKA_SERVER_URL.asc" -o /tmp/tika-server-${TIKA_VERSION}.jar.asc \

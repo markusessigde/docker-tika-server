@@ -13,6 +13,9 @@ Out-of-the-box the container also includes dependencies for the GDAL and Tessera
 
 To install more languages simply update the apt-get command to include the package containing the language you required, or include your own custom packs using an ADD command.
 
+This container includes imagemagick and python3 so that 
+the TesseractOCR parser can prepare images for better results.
+
 ## Usage
 
 First you need to pull down the build from Dockerhub, which can be done by invoking:
