@@ -5,12 +5,11 @@ ENV TIKA_SERVER_URL https://www.apache.org/dist/tika/tika-server-$TIKA_VERSION.j
 
 
 # set noninteractive installation
-export DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 #install tzdata package
-RUN apt-get install -y tzdata
-# set your timezone
-ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
+RUN apt-get install -y tzdata \
+	&& ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata
 
 
 RUN	apt-get update \
