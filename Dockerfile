@@ -43,7 +43,10 @@ RUN	apt-get update \
 		| sed -r -e 's/^"//; s/",$//; s/" "//') \
 	&& echo "Nearest mirror: $NEAREST_TIKA_SERVER_URL" \
 	&& curl -sSL "$NEAREST_TIKA_SERVER_URL" -o /tika-server-${TIKA_VERSION}.jar \
-	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+	&& mkdir -p /org/apache/tika/parser/oc
+
+ADD TesseractOCRConfig.properties /org/apache/tika/parser/ocr/TesseractOCRConfig.properties
 
 EXPOSE 9998
-ENTRYPOINT java -jar /tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
+ENTRYPOINT java -cp /org/apache/tika/parser/ocr -jar /tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
