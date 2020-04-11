@@ -49,4 +49,4 @@ RUN	apt-get update \
 ADD TesseractOCRConfig.properties /org/apache/tika/parser/ocr/TesseractOCRConfig.properties
 
 EXPOSE 9998
-ENTRYPOINT java -cp /org/apache/tika/parser/ocr:/tika-server-${TIKA_VERSION}.jar org.apache.tika.server.TikaServerCli -h 0.0.0.0
+ENTRYPOINT java -cp /:/tika-server-${TIKA_VERSION}.jar org.apache.tika.server.TikaServerCli -h 0.0.0.0
