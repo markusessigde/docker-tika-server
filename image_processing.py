@@ -45,7 +45,7 @@ def set_image_dpi(file_path):
 
 
 def process_image_for_ocr(file_path):
-    logger.info('Processing image for text Extraction: {f}', file_path)
+    logger.info('Processing image for text Extraction: ' + file_path)
     temp_filename = set_image_dpi(file_path)
     im_new = remove_noise_and_smooth(temp_filename)
     return im_new
