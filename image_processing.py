@@ -23,14 +23,7 @@ def set_image_dpi(file_path):
     return temp_filename
 
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to input image file")
-args = vars(ap.parse_args())
 
-img = process_image_for_ocr(args["image"])
-
-cv2.imwrite(args["image"], img)
 
 def process_image_for_ocr(file_path):
     print('Processing image for text Extraction')
@@ -57,3 +50,14 @@ def remove_noise_and_smooth(file_name):
     img = image_smoothening(img)
     or_image = cv2.bitwise_or(img, closing)
     return or_image
+
+
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required=True,
+	help="path to input image file")
+args = vars(ap.parse_args())
+
+img = process_image_for_ocr(args["image"])
+
+cv2.imwrite(args["image"], img)
