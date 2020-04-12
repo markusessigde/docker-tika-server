@@ -8,9 +8,26 @@ import numpy as np
 import argparse
 import os
 import shutil
+import logging
 
 IMAGE_SIZE = 1800
 BINARY_THREHOLD = 180
+
+logger = logging.getLogger('image_processing')
+logger.setLevel(logging.DEBUG)
+
+fh = logging.FileHandler('image_processing.log')
+fh.setLevel(logging.DEBUG)
+
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+
+logger.addHandler(fh)
+logger.addHandler(ch)
 
 
 def set_image_dpi(file_path):
@@ -28,7 +45,7 @@ def set_image_dpi(file_path):
 
 
 def process_image_for_ocr(file_path):
-    print('Processing image for text Extraction')
+    logger.info('Processing image for text Extraction: {f}', file_path)
     temp_filename = set_image_dpi(file_path)
     im_new = remove_noise_and_smooth(temp_filename)
     return im_new
@@ -43,7 +60,7 @@ def image_smoothening(img):
 
 
 def remove_noise_and_smooth(file_name):
-    print('Removing noise and smoothening image')
+    logger.info('Removing noise and smoothening image')
     img = cv2.imread(file_name, 0)
     filtered = cv2.adaptiveThreshold(img.astype(np.uint8), 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 41, 3)
     kernel = np.ones((1, 1), np.uint8)
