@@ -1,0 +1,36 @@
+FROM registry.local:5000/docker/tika-server:1.24
+
+
+# set noninteractive installation
+ENV DEBIAN_FRONTEND noninteractive
+
+
+RUN	apt-get update \
+	&& apt-get install cmake \
+			gcc \
+			g++ \
+			libavcodec-dev libavformat-dev libswscale-dev \
+ 			libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev \
+			libgtk-3-dev \
+			libpng-dev libjpeg8-dev libopenexr-dev libtiff-dev libwebp-dev \
+	&& curl -sSL https://github.com/opencv/opencv/archive/4.3.0.zip \
+    && unzip 4.3.0.zip \
+    && cd opencv-4.3.0 \
+	&& mkdir build \
+	&& cd build \
+	&& cmake ../ \
+    && make \
+    && make install \
+    && ldconfig /usr/local/lib \
+    && cd ../../ \
+    && rm -rf 4.3.0.zip opencv-4.3.0 \
+	&& pip3 install pillow imutils \
+	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ADD image_processing.py /app/image_processing.py
+ADD convert_opencv.sh /app/convert
+
+RUN chmod +x /app/convert && chmod +x /app/image_processing.py
+
+EXPOSE 9998
+ENTRYPOINT java -cp /app:/app/tika-server-${TIKA_VERSION}.jar org.apache.tika.server.TikaServerCli -h 0.0.0.0
