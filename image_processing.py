@@ -7,6 +7,7 @@ import imutils
 import numpy as np
 import argparse
 import os
+import shutil
 
 IMAGE_SIZE = 1800
 BINARY_THREHOLD = 180
@@ -15,12 +16,12 @@ BINARY_THREHOLD = 180
 def set_image_dpi(file_path):
     im = Image.open(file_path)
     length_x, width_y = im.size
-    factor = min(1, float(1024.0 / length_x))
+    factor = min(1, float(2048.0 / length_x))
     size = int(factor * length_x), int(factor * width_y)
     im_resized = im.resize(size, Image.ANTIALIAS)
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.png')
     temp_filename = temp_file.name
-    im_resized.save(temp_filename, dpi=(300, 300))
+    im_resized.save(temp_filename, dpi=(600, 600))
     return temp_filename
 
 
@@ -62,3 +63,5 @@ args = vars(ap.parse_args())
 img = process_image_for_ocr(args["image"])
 
 cv2.imwrite(os.path.splitext(args["image"])[0] + ".png", img)
+
+shutil.move(os.path.splitext(args["image"])[0] + ".png", args["image"])
