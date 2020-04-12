@@ -7,6 +7,6 @@ echo "run image processing on ${11} using opencv"
 
 /app/image_processing.py -i ${11}
 
-cp ${11} /app/"$(basename -- ${11})"
+cp ${11} /app/$(basename -- ${11})
 
 echo "finish image processing on ${11} using opencv"
