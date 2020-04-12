@@ -6,6 +6,7 @@ from PIL import Image
 import imutils
 import numpy as np
 import argparse
+import os
 
 IMAGE_SIZE = 1800
 BINARY_THREHOLD = 180
@@ -60,4 +61,4 @@ args = vars(ap.parse_args())
 
 img = process_image_for_ocr(args["image"])
 
-cv2.imwrite(args["image"], img)
+cv2.imwrite(os.path.splitext(args["image"])[0] + ".png", img)
