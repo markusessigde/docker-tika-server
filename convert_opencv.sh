@@ -2,7 +2,7 @@
 
 echo "called convert $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}" >> /image_processing.log
 
-convert $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} 
+#convert $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} 
 
 echo "run image processing on ${11} using opencv" >> /image_processing.log
 
