@@ -2,7 +2,7 @@
 This repo is used to build the docker image on raspberrypi.
 
 # tika-server
-This repo contains the Dockerfile to create a docker image that contains the latest Ubuntu running the Apache Tika 1.23 Server on Port 9998 using Java 11.
+This repo contains the Dockerfile to create a docker image that contains the latest Ubuntu running the Apache Tika 1.24.1 Server on Port 9998 using Java 11.
 
 Out-of-the-box the container also includes dependencies for the GDAL and Tesseract OCR parsers.  To balance showing functionality versus the size of the image, this file currently installs the language packs for the following languages:
 * English
@@ -14,7 +14,9 @@ Out-of-the-box the container also includes dependencies for the GDAL and Tessera
 To install more languages simply update the apt-get command to include the package containing the language you required, or include your own custom packs using an ADD command.
 
 This container includes imagemagick and python3 so that 
-the TesseractOCR parser can prepare images for better results.
+the TesseractOCR parser preprocessing images for better results.
+
+There is a second version with opencv instead of imagemagick for image preprocessing.
 
 ## Usage
 

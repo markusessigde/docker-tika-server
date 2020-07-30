@@ -1,4 +1,4 @@
-FROM registry.local:5000/docker/tika-server:1.24
+FROM registry.local:5000/docker/tika-server:1.24.1
 
 
 # set noninteractive installation

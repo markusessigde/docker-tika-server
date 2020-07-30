@@ -22,10 +22,10 @@ build-docker:
   script:
     - docker build -f Dockerfile -t "$CI_REGISTRY_IMAGE":tika-server .
     - docker tag "$CI_REGISTRY_IMAGE":tika-server "$CI_REGISTRY_IMAGE"
-    - docker tag "$CI_REGISTRY_IMAGE":tika-server "$CI_REGISTRY_IMAGE":1.24
+    - docker tag "$CI_REGISTRY_IMAGE":tika-server "$CI_REGISTRY_IMAGE":1.24.1
     - docker push "$CI_REGISTRY_IMAGE":tika-server
     - docker push "$CI_REGISTRY_IMAGE"
-    - docker push "$CI_REGISTRY_IMAGE":1.24
+    - docker push "$CI_REGISTRY_IMAGE":1.24.1
 
 
 build-docker_opencv:
@@ -33,6 +33,6 @@ build-docker_opencv:
   stage: build
   script:
     - docker build -f Dockerfile_opencv -t "$CI_REGISTRY_IMAGE":tika-server-opencv .
-    - docker tag "$CI_REGISTRY_IMAGE":tika-server-opencv "$CI_REGISTRY_IMAGE":tika-server-opencv-1.24
+    - docker tag "$CI_REGISTRY_IMAGE":tika-server-opencv "$CI_REGISTRY_IMAGE":tika-server-opencv-1.24.1
     - docker push "$CI_REGISTRY_IMAGE":tika-server-opencv
-    - docker push "$CI_REGISTRY_IMAGE":tika-server-opencv-1.24
+    - docker push "$CI_REGISTRY_IMAGE":tika-server-opencv-1.24.1
